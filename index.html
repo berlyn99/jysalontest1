@@ -20,11 +20,6 @@ body{
     text-align:center;
 }
 
-img{
-    width:100%;
-    border-radius:18px;
-}
-
 h1{
     margin-top:25px;
     font-size:34px;
@@ -44,6 +39,7 @@ p{
     border-radius:12px;
     margin-top:18px;
     font-size:18px;
+    cursor:pointer;
 }
 
 .button.white{
@@ -58,7 +54,6 @@ p{
     color:#888;
 }
 </style>
-
 </head>
 
 <body>
@@ -66,68 +61,108 @@ p{
 <div class="container">
 
 <h1>JY Salon</h1>
-
-<p>
-Hair • Nail • Beauty
-</p>
+<p>Hair • Nail • Beauty</p>
 
 <p>
 谢谢您选择 JY Salon 🤍<br><br>
-
-如果喜欢今天的服务，欢迎分享到小红书。<br>
-
-发布后向店员出示，即可获得<br><br>
-
-<b>🎁 下次 RM10 优惠</b>
+分享到小红书并出示，即可获得 <b>🎁 RM10 优惠</b>
 </p>
 
-<a class="button" onclick="copyText('今天来JB做美甲，意外发现一家很舒服的店✨
+<a class="button" onclick="randomCopy('nail')">💅 我今天做美甲</a>
+<a class="button" onclick="randomCopy('hair')">💇 我今天做美发</a>
+<a class="button" onclick="randomCopy('both')">✨ 我今天两个都有</a>
 
-环境干净，美甲师做事很细心，不会一直推销，整个过程都很放松。
-
-这次做出来的效果跟我想要的几乎一样，细节处理得很好，很满意🤍
-
-📍JY Salon 美发美甲
-No.24, Jalan Indah 25/16, Taman Bukit Indah')">
-💅 我今天做美甲
-</a>
-
-<a class="button" href="#">
-💇 我今天做美发
-</a>
-
-<a class="button" href="#">
-✨ 我今天两个都有
-</a>
-
-<a class="button white"
-href="https://wa.me/60176368216">
+<a class="button white" href="https://wa.me/60176368216">
 📲 WhatsApp预约
 </a>
-
-<div class="footer">
-
-📍 No.24, Jalan Indah 25/16<br>
-
-Taman Bukit Indah<br><br>
-
-小红书：JY Salon 美发美甲
-
-</div>
-
-</div>
 
 </div>
 
 <script>
-function copyText(text){
-    navigator.clipboard.writeText(text).then(() => {
-        alert("文案已复制！打开小红书去发布吧 ✨");
+
+const footer = `
+
+📍Jy Hairdesign and Nail Salon
+#bukitindah美发美甲店 #jbsalon #新山美甲 #新山剪发
+`;
+
+/* ====== 15条美甲 ====== */
+const nail = [
+"今天做了一个很干净的美甲造型 💅 很喜欢这种简单风格",
+"换了新指甲心情也变好了 ✨ 很舒服的体验",
+"颜色很温柔，做出来比想象中更好看",
+"整个过程很放松，没有压力的感觉 🤍",
+"细节做得很认真，我很满意这次的美甲",
+"简单但很有质感的一次美甲体验 💅",
+"指甲做完真的很精致，很喜欢这个效果",
+"环境很舒服，美甲过程很享受 ✨",
+"这次的款式很适合日常，很自然",
+"做完指甲感觉整个人都变精致了 🤍",
+"美甲师很细心，每一步都很认真",
+"颜色选得很好，看起来很干净高级",
+"很喜欢今天这个简约风格 💅",
+"做完真的会想一直看自己的手 ✨",
+"整体体验很好，下次还会再来"
+];
+
+/* ====== 15条美发 ====== */
+const hair = [
+"剪完头发整个人都清爽了 ✂️ 很喜欢这个造型",
+"层次感很好，很自然的感觉",
+"发型比我想象中更适合自己 🤍",
+"设计师很有耐心，沟通很好",
+"剪完之后感觉气质变了 ✨",
+"很轻盈的发型，很好整理",
+"整个过程很舒服，没有压力",
+"新发型真的很满意 💇‍♀️",
+"很自然但很有型的剪发效果",
+"设计师会慢慢调整到我喜欢的样子",
+"剪完头发心情很好 🤍",
+"这个长度刚刚好，很适合我",
+"很清爽的感觉，很喜欢 ✨",
+"剪发过程很细心，很专业",
+"整体体验很好，下次还会再来"
+];
+
+/* ====== 15条两个服务 ====== */
+const both = [
+"今天做了头发+美甲 💇‍♀️💅 整个人焕然一新",
+"从头到指尖都整理好了，很满意 ✨",
+"一次做完两个项目真的很方便",
+"整体造型升级成功 🤍 很喜欢今天的状态",
+"头发和指甲都很满意的一天",
+"变美的一站式体验，很舒服",
+"今天真的有被认真对待的感觉 ✨",
+"做完感觉整个人都精致了",
+"从发型到指甲都很协调 🤍",
+"很推荐一次做完整套服务",
+"今天的改变很明显，很开心",
+"整体效果比想象中更好",
+"很舒服的一次全套体验",
+"感觉自己状态提升了不少 ✨",
+"JY Salon一站式体验真的很值得"
+];
+
+/* ====== 核心函数 ====== */
+function randomCopy(type){
+    let list = [];
+
+    if(type === 'nail') list = nail;
+    if(type === 'hair') list = hair;
+    if(type === 'both') list = both;
+
+    const text = list[Math.floor(Math.random() * list.length)];
+
+    const finalText = text + footer;
+
+    navigator.clipboard.writeText(finalText).then(() => {
+        alert("已复制文案 ✨ 打开小红书发布吧！");
         window.location.href = "xhsdiscover://";
     }).catch(() => {
         alert("复制失败，请手动复制");
     });
 }
+
 </script>
 
 </body>
